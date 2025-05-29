@@ -1,4 +1,4 @@
-# 📦 Subscription Management Microservice
+# Subscription Management Microservice
 
 A scalable, secure microservice to manage user subscriptions and plans for a SaaS platform, built using **Node.js**, **Express.js**, **MongoDB**, and **JWT**.
 
@@ -6,18 +6,18 @@ A scalable, secure microservice to manage user subscriptions and plans for a Saa
 
 ## 🔧 Features
 
-- ✅ JWT-based user authentication (Signup/Login)
-- 📜 CRUD operations for user subscriptions
-- 📦 Plan management (create, list plans)
-- 🔄 Update, cancel, and auto-expire subscriptions
-- 🛡 Secure routes with JWT middleware
-- 🧭 Clean architecture + RESTful API design
-- ⏰ Background cron job to expire subscriptions
-- 📈 Scalable and fault-tolerant structure
+- JWT-based user authentication (Signup/Login)
+- CRUD operations for user subscriptions
+- Plan management (create, list plans)
+- Update, cancel, and auto-expire subscriptions
+- Secure routes with JWT middleware
+- Clean architecture + RESTful API design
+- Background cron job to expire subscriptions
+- Scalable and fault-tolerant structure
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Layer             | Tech                        |
 |------------------|-----------------------------|
@@ -31,7 +31,7 @@ A scalable, secure microservice to manage user subscriptions and plans for a Saa
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 ```bash
 src/
 ├── app.js
@@ -57,7 +57,7 @@ src/
 │ └── subscriptionExpiryJob.js
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
@@ -87,72 +87,43 @@ JWT_SECRET=<your_jwt_secret>
 npm start
 ```
 
-🔐 Auth Endpoints
+## Auth Endpoints
+| Method  | Endpoint         | Description         |
+|---------|------------------|---------------------|
+| POST    | /api/auth/signup | Register a new user |
+| POST	  | /api/auth/login	 | Login and get token |
 
-| Method  | Endpoint| Description |
-|------------------|-----------------------------|
-| POST | /api/auth/signup | Register a new user |
-| POST	| /api/auth/login	| Login and get token |
+## Plan Management
+| Method  | Endpoint         | Description         |
+|---------|------------------|---------------------|
+|GET	|/api/plans	|Get all available plans|
 
-📦 Plan Management
-Method	Endpoint	Description
-GET	/api/plans	Get all available plans
+## Subscription Management
 
-📜 Subscription Management
-🔐 All endpoints below require an Authorization header:
-
-makefile
-Copy
-Edit
 Authorization: Bearer <JWT_TOKEN>
-Method	Endpoint	Description
-POST	/api/subscriptions	Subscribe to a plan
-GET	/api/subscriptions/:userId	Get current subscription
-PUT	/api/subscriptions/:userId	Update/Upgrade subscription plan
-DELETE	/api/subscriptions/:userId	Cancel subscription
 
-⏰ Auto-Expiration (Cron Job)
-Subscriptions with a duration will automatically expire once the endDate is passed.
+| Method  | Endpoint         | Description         |
+|---------|------------------|---------------------|
+|POST	|/api/subscriptions	|Subscribe to a plan|
+|GET	|/api/subscriptions/:userId	|Get current subscription|
+|PUT	|/api/subscriptions/:userId	|Update/Upgrade subscription plan|
+|DELETE	|/api/subscriptions/:userId	|Cancel subscription|
 
-The cron job runs every hour and updates expired subscriptions.
+## Auto-Expiration (Cron Job)
 
-🔁 Defined in: src/jobs/subscriptionExpiryJob.js
+- Subscriptions with a duration will automatically expire once the endDate is passed.
 
-📈 Future Improvements
- Plan creation and updates via API
+- The cron job runs every midnight and updates expired subscriptions.
 
- Email notifications for subscription expiry
+- Defined in: src/jobs/subscriptionExpiryJob.js
 
- Integration with payment gateways
 
- Caching (Redis) for frequently accessed data
+## Testing the API
+- Use Postman collection:
+- Link: https://www.postman.com/cryosat-specialist-7552414/workspace/educase/collection/33360544-074996bb-4be1-4c87-ae4b-93b93a6b23d3?action=share&creator=33360544
 
- Asynchronous event handling via Kafka/RabbitMQ
+- Register → /api/auth/signup
 
-🧪 Testing the API
-Use tools like Postman or Thunder Client:
+- Login → /api/auth/login to get token
 
-Register → /api/auth/signup
-
-Login → /api/auth/login to get token
-
-Use token to access other routes
-
-🤝 Contributing
-Pull requests are welcome! For major changes, please open an issue first to discuss.
-
-📄 License
-MIT License
-
-👨‍💻 Author
-Made with ❤️ by Your Name
-
-markdown
-Copy
-Edit
-
-Let me know if you also want:
-- A ready `Dockerfile` + `docker-compose.yml`
-- `Postman collection` file for testing all APIs
-- GitHub Action for CI/CD  
-Happy to generate any or all of them for you!
+- Use token to access other routes
